@@ -1,0 +1,32 @@
+[2023-12-14T14:16:21.563+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: first_dag.send_email manual__2023-12-14T14:16:19.312811+00:00 [queued]>
+[2023-12-14T14:16:21.569+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: first_dag.send_email manual__2023-12-14T14:16:19.312811+00:00 [queued]>
+[2023-12-14T14:16:21.570+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2023-12-14T14:16:21.581+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): send_email> on 2023-12-14 14:16:19.312811+00:00
+[2023-12-14T14:16:21.585+0000] {standard_task_runner.py:57} INFO - Started process 73 to run task
+[2023-12-14T14:16:21.588+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'first_dag', 'send_email', 'manual__2023-12-14T14:16:19.312811+00:00', '--job-id', '28', '--raw', '--subdir', 'DAGS_FOLDER/first_dag.py', '--cfg-path', '/tmp/tmpeqd5w4pz']
+[2023-12-14T14:16:21.591+0000] {standard_task_runner.py:85} INFO - Job 28: Subtask send_email
+[2023-12-14T14:16:21.628+0000] {task_command.py:416} INFO - Running <TaskInstance: first_dag.send_email manual__2023-12-14T14:16:19.312811+00:00 [running]> on host 86a9270c923f
+[2023-12-14T14:16:21.693+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='first_dag' AIRFLOW_CTX_TASK_ID='send_email' AIRFLOW_CTX_EXECUTION_DATE='2023-12-14T14:16:19.312811+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-14T14:16:19.312811+00:00'
+[2023-12-14T14:16:21.695+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/first_dag.py", line 19, in send_email
+    conn = psycopg2.connect(
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (::1), port 5432 failed: Cannot assign requested address
+	Is the server running on that host and accepting TCP/IP connections?
+
+[2023-12-14T14:16:21.705+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=first_dag, task_id=send_email, execution_date=20231214T141619, start_date=20231214T141621, end_date=20231214T141621
+[2023-12-14T14:16:21.715+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 28 for task send_email (connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (::1), port 5432 failed: Cannot assign requested address
+	Is the server running on that host and accepting TCP/IP connections?
+; 73)
+[2023-12-14T14:16:21.720+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-12-14T14:16:21.733+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

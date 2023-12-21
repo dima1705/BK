@@ -1,0 +1,47 @@
+{% extends 'products/base.html' %}
+{% load static %}
+
+{% block css %}
+<link href="{% static 'vendor/css/products.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <table class="table table-borderless">
+        <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row"></th>
+            <td class="align-middle">
+                <img class="rounded float-start"
+                     src='{{ burger.image.url }}'
+                     alt=""
+                    align="left">
+            </td>
+            <td>
+                <h4 class="card-title" align="center">
+                    {{ burger.name }}
+                </h4>
+                <p class="card-text" align="top">{{ burger.description }}</p>
+                <h5 align="left">{{ burger.weight }}</h5>
+                <h5 align="right">{{ burger.price }} руб.</h5>
+
+                <form action="{% url  'cart:cart_add' burger.id %}" method="post">
+                    {{ cart_product_form }}
+                    {% csrf_token %}
+                        <input class="btn btn-success" type="submit" value="Добавить в корзину" align="right">
+                </form>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

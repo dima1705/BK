@@ -1,0 +1,25 @@
+{% extends 'orders/base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Спасибо!</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="order-info">
+                            <h3 class="fs-1">Ваш заказ принят. Для подтверждения заказа и
+                                дополнительной информации с вами свяжется наш менеджер</h3>
+                            <a href="{% url  'burgers:burgers' %}"
+                               class="btn btn-warning">Вернуться к меню</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

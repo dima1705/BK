@@ -1,0 +1,78 @@
+{% extends 'products/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="{% static 'vendor/css/products.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+
+{% if cart %}
+<div class="container">
+    <h1 align="middle">Корзина</h1>
+    <table class="table align-middle">
+        <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in cart %}
+        {% with product=item.product %}
+        <tr>
+            <td class="align-middle">
+                <a href="{% url 'products:burger_card' item.product.pk %}">
+                    <img class="img-thumbnail"
+                         src="{{ product.image.url }}"
+                         align="left"
+                    >
+                </a>
+            </td>
+            <td class="align-middle">
+                <h4 class="card-title" align="middle">
+                    {{ product.name }}
+                </h4>
+            </td>
+            <td class="align-middle">
+                <h5 align="middle">{{ product.price }}руб.</h5>
+            </td>
+            <td class="align-middle">
+                <h5 align="middle">x{{ item.quantity }}</h5>
+            </td>
+            <td class="align-middle">
+                <h5 align="center">{{ item.total_price }}руб</h5>
+            </td>
+            <td class="align-middle">
+                <a href="{% url  'cart:cart_remove' product.id%}"
+                   class="btn btn-outline-danger">
+                    Удалить
+                </a>
+            </td>
+        </tr>
+        {% endwith %}
+        {% endfor %}
+            <tr class="total">
+                <td></td>
+                <td colspan="4"></td>
+                <td class="num">
+                    <h5>Итого: {{ cart.get_total_price }}руб</h5>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="text-right">
+        <a href="{% url  'burgers:burgers' %}"
+           class="btn btn-warning">Вернуться к меню</a>
+        <a href="{% url 'orders:order_create' %}"
+           class="btn btn-success">Оформить заказ</a>
+    </p>
+</div>
+{% else %}
+    <h1 align="middle">Ваша корзина до сих пор пуста...</h1>
+{% endif %}
+{% endblock %}
